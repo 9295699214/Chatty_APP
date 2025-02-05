@@ -19,7 +19,7 @@ const __dirname = path.resolve();
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: ["'self'", "*", "data:", "blob:"],
       fontSrc: ["'self'", "data:", "https:"],
       imgSrc: ["'self'", "data:", "https:"],
       scriptSrc: ["'self'", "'unsafe-inline'", "https:"],
