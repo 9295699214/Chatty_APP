@@ -17,10 +17,11 @@ const __dirname = path.resolve();
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
-    "default-src 'self'; font-src 'self' data:; img-src 'self' data:;"
+    "default-src 'self'; font-src 'self' data: https://fonts.googleapis.com; img-src 'self' data: https://images.com; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;"
   );
   next();
 });
+
 
 app.use(express.json());
 app.use(cookieParser());
