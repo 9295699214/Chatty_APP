@@ -8,11 +8,29 @@ import connectDB from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
+const helmet = require('helmet');
 
 dotenv.config();
 
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
+
+app.use(helmet());
+
+// CSP configuration
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],  // Allow resources from the same origin
+      scriptSrc: ["'self'", "'unsafe-inline'"],  // Allow inline scripts (you can restrict this if possible)
+      styleSrc: ["'self'", "'unsafe-inline'"],  // Allow inline styles
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],  // Allow fonts from Google Fonts
+      imgSrc: ["'self'", "data:", "https://images.unsplash.com"],  // Allow images from your domain and data URIs
+      connectSrc: ["'self'"],  // Allow AJAX/fetch connections from your domain
+      frameAncestors: ["'none'"],  // Prevent embedding in iframes
+    },
+  })
+);
 
 app.use((req, res, next) => {
   res.setHeader(
