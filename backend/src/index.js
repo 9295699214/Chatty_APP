@@ -24,8 +24,7 @@ app.use(helmet({
       imgSrc: ["'self'", "data:"],
       scriptSrc: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'"],
-      connectSrc: ["'self'", "ws:"], // Allow WebSocket connections
-      // Add other directives as needed
+      connectSrc: ["'self'", "ws:", "wss:"],
     },
   },
 }));
